@@ -174,7 +174,6 @@ Return list of two elements: status (t or nil) and string with result."
   "Set and run prettier from project directory, if found othervise as global.
 With prefix ARG ask which parser to use."
   (interactive "P")
-  (require 'prettier-js)
   (if-let ((local-prettier (when buffer-file-name
                              (prettier-js-buffer-local-command))))
       (setq-local prettier-js-command local-prettier)
