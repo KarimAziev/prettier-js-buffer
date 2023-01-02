@@ -175,7 +175,8 @@ Return list of two elements: status (t or nil) and string with result."
 With prefix ARG ask which parser to use."
   (interactive "P")
   (require 'prettier-js)
-  (if-let ((local-prettier (prettier-js-buffer-local-command)))
+  (if-let ((local-prettier (when buffer-file-name
+                             (prettier-js-buffer-local-command))))
       (setq-local prettier-js-command local-prettier)
     (let ((args
            prettier-js-buffer-global-args)

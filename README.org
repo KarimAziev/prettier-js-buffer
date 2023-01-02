@@ -17,9 +17,9 @@ Run prettier-js in buffers without filename.
 Download the source code and put it wherever you like and add the directory to the load path:
 
 #+begin_src elisp :eval no
-
 (add-to-list 'load-path "/path/to/prettier-js-buffer")
 (require 'prettier-js-buffer)
+(advice-add 'prettier-js :around #'prettier-js-buffer-or-region)
 #+end_src
 
 *** With use-package and straight
