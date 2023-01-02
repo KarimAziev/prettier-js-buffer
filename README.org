@@ -1,0 +1,63 @@
+#+OPTIONS: tags:nil
+#+TITLE:README
+#+AUTHOR: Karim Aziiev
+#+EMAIL: karim.aziiev@gmail.com
+* prettier-js-buffer
+
+Run prettier-js in buffers without filename.
+
+** Requirements
++ Emacs >= 27.1
++ prettier-js
+
+** Installation
+
+*** Manual
+
+Download the source code and put it wherever you like and add the directory to the load path:
+
+#+begin_src elisp :eval no
+
+(add-to-list 'load-path "/path/to/prettier-js-buffer")
+(require 'prettier-js-buffer)
+#+end_src
+
+*** With use-package and straight
+
+#+begin_src elisp :eval no
+(use-package prettier-js-buffer
+  :straight (prettier-js-buffer
+             :repo "KarimAziev/prettier-js-buffer"
+             :type git
+             :host github)
+  :commands (prettier-js-buffer)
+  :hook ((web-mode
+          js-mode
+          js2-mode
+          typescript-mode
+          typescript-ts-mode
+          tsx-ts-mode
+          markdown-mode
+          prettier-js
+          json-mode)
+         .
+         prettier-js-buffer-setup)
+  :config
+  (advice-add 'prettier-js :around #'prettier-js-buffer-or-region))
+
+#+end_src
+
+** Commands
+
+*** ~prettier-js-buffer~  (&optional arg)
+Set and run prettier from project directory, if found othervise as global. With prefix ~arg~ ask which parser to use.
+** Customization
+
+*** ~prettier-js-buffer-major-modes-parsers~
+Alist of allowed major modes and corresponding prettier parsers.
+*** ~prettier-js-buffer-parsers~
+Alist of allowed file extensions and corresponding prettier parsers.
+*** ~prettier-js-buffer-blacklist-regexp~
+Regexp of directories to disable prettier setup.
+*** ~prettier-js-buffer-global-args~
+List of default global args to send to prettier command.
