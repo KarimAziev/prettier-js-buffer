@@ -138,7 +138,7 @@
 (defun prettier-js-buffer-setup ()
   "Enable prettier from project directory."
   (unless (or (not prettier-js-buffer-blacklist-regexp)
-              (string-match-p "\\(tmp\\|snippets\\|node_modules\\)"
+              (string-match-p "\\(snippets\\|node_modules\\)"
                               default-directory))
     (let ((local-cmd (prettier-js-buffer-local-command)))
       (setq-local prettier-js-command
