@@ -82,6 +82,7 @@
           :key-type (symbol :tag "Major mode")
           :value-type (string :tag "Parser")))
 
+
 (defun prettier-js-buffer-find-exec ()
   "Return prettier executable, either from node_modules or globally."
   (let ((dir default-directory)
@@ -200,8 +201,9 @@ With prefix ARG ask which parser to use."
                                  (list "--parser"
                                        (completing-read
                                         "--parser "
-                                        (mapcar #'cdr
-                                                prettier-js-buffer-parsers))))
+                                        (seq-uniq
+                                         (mapcar #'cdr
+                                                 prettier-js-buffer-parsers)))))
                               prettier-js-args)))
     (condition-case nil
         (progn (if prettier-js-command
